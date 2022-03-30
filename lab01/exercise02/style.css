@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
 body * {
     box-sizing: border-box;
 }
@@ -11,9 +13,40 @@ Add some style blocks below this line to style the cards.
 Feel free to borrow from Exercise 1.
 */
 
+main {
+    display: flex;
+}
+
+section {
+    width: 400px;
+    border: solid 1px grey;
+    margin: 10px;
+    padding-bottom: 15px;
+}
+
+h2 {
+    font-family: 'Poppins';
+}
+
+section h2, section p, section button {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+img {
+    width: 100%;
+}
+
+iframe {
+    width: 100%;
+    min-height: 300px;
+}
 
 /* Tablet Media Query */
 @media only screen and (max-width: 1000px) {
+    main{
+        flex-wrap: wrap;
+    }
 
 }
 
