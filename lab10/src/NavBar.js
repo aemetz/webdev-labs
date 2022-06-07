@@ -16,7 +16,9 @@ class NavBar extends React.Component {
         return (
             <nav className="main-nav">
                 <h1>{this.props.title}</h1> 
+                {<a href="url"> API Docs </a>}
                 { this.props.username }
+                {<a href="url"> Sign out </a>}
                 {/* Navigation Links */}
             </nav>
         )

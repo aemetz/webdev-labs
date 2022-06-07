@@ -42,7 +42,8 @@ class App extends React.Component {
                 username={this.state.user.username}/>
 
             <aside>
-                <Profile />
+                <Profile 
+                user_profile = {this.state.user}/>
                 <Suggestions />
             </aside>
 
