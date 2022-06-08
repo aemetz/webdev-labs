@@ -1,6 +1,7 @@
 import React from 'react';
 import LikeButton from './LikeButton';
 import BookmarkButton from './BookmarkButton';
+import AddComment from './AddComment';
 import {getHeaders} from './utils';
 
 class Post extends React.Component {
@@ -31,12 +32,48 @@ class Post extends React.Component {
         })
     }
 
+    showComments () {
+        // console.log(this.state.post.comments.length)
+        // const lastIndex = this.state.post.comments.length - 1
+        // const lastComment = this.state.comments[lastIndex]
+        // const firstComment = this.state.comments[0].text
+        // const commentsNum = this.state.comments.length
+        const post = this.state.post
+
+        if (post.comments.length === 1){
+            return (
+                
+                <p><b>{post.comments[0].user.username}</b>{post.comments[0].text}</p>
+            ) 
+        }
+        else if(post.comments.length > 1){
+            return(
+                <div>
+                    <button>View all {post.comments.length} comments</button>
+                    <p><b>{post.comments[post.comments.length - 1].user.username} </b>
+                    {post.comments[post.comments.length - 1].text}</p>
+                </div>
+                
+            )
+            
+        }
+        else{
+            return(
+                <p>No comments...</p>
+            )
+            
+        }
+    }
+
     render () {
         const post = this.state.post;
         return (
             <section 
                 className="card">
+                <b>{post.user.username}</b>
+
                 <img src={post.image_url}/>
+                
                 <LikeButton 
                     likeId={post.current_user_like_id}
                     postId={post.id}
@@ -47,7 +84,14 @@ class Post extends React.Component {
                     bookmarkId={post.current_user_bookmark_id}
                     postId={post.id}
                     refreshPost={this.refreshPostDataFromServer} />
-                <p>{post.caption}</p>
+
+                <p><b>{post.user.username} </b>{post.caption}</p>
+                {this.showComments()}
+
+                <AddComment 
+                    post={post}
+                    refreshPost={this.refreshPostDataFromServer} />
+                
             </section>
         )
     }
@@ -55,3 +99,5 @@ class Post extends React.Component {
                 
 
 export default Post;
+
+

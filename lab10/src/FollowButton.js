@@ -5,6 +5,9 @@ class FollowButton extends React.Component {
   
     constructor(props) {
         super(props);
+        this.state = {
+            followingId: null
+        }
         // binding "this"
         this.toggleFollow = this.toggleFollow.bind(this);
         this.followUser = this.followUser.bind(this);
@@ -16,7 +19,7 @@ class FollowButton extends React.Component {
     }
 
     toggleFollow () {
-        if(this.props.suggestedId) {
+        if(this.state.followingId) {
             this.unfollowUser();
         } else {
             this.followUser();
@@ -27,7 +30,7 @@ class FollowButton extends React.Component {
         // fetch POST: /api/posts/likes
         const url = '/api/following/';
         const userData = {
-            user_id: this.props.suggestedId
+            user_id: this.props.userId
         }
         console.log('create follow', url);
         fetch(url, {
@@ -38,12 +41,12 @@ class FollowButton extends React.Component {
         .then(data => {
             // needs to trigger a post redraw:
             console.log(data);
-            this.props.refreshSuggestion();
+            this.setState({followingId: data.id})
         })
     }
 
     unfollowUser () {
-        const url = '/api/following' + this.props.suggestedId;
+        const url = '/api/following/' + this.state.followingId;
         console.log('remove follow', url);
         fetch(url, {
             headers: getHeaders(),
@@ -52,18 +55,18 @@ class FollowButton extends React.Component {
         .then(data => {
             // needs to trigger a post redraw:
             console.log(data);
-            this.props.refreshSuggestion();
+            this.setState({followingId: null})
         })
     }
 
     render () {
-        const userId = this.props.suggestedId;
-        const heartClass = (userId ? 'fas' : 'far') + ' fa-heart';
+        const followingId = this.state.followingId;
+        const followClass = (followingId ? 'unfollow' : 'follow');
         return (
             <button 
                 onClick={this.toggleFollow}
                 aria-label="Follow">
-                <i className={heartClass}></i>
+                {followClass}
             </button>
         )
     }

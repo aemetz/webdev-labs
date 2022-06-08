@@ -39,6 +39,7 @@ class Suggestions extends React.Component {
                             <Suggestion 
                                 key={'suggestion_' + suggestion.id}
                                 model={suggestion}/>
+                                
                         )
                     })
                 }
