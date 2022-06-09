@@ -33,11 +33,6 @@ class Post extends React.Component {
     }
 
     showComments () {
-        // console.log(this.state.post.comments.length)
-        // const lastIndex = this.state.post.comments.length - 1
-        // const lastComment = this.state.comments[lastIndex]
-        // const firstComment = this.state.comments[0].text
-        // const commentsNum = this.state.comments.length
         const post = this.state.post
 
         if (post.comments.length === 1){

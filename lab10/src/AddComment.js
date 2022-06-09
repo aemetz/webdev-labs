@@ -25,7 +25,7 @@ class AddComment extends React.Component {
             post_id: this.props.post.id,
             text: this.addedComment.current.value
         }
-        console.log('create like', url);
+        console.log('create comment', url);
         fetch(url, {
             headers: getHeaders(),
             method: 'POST',
